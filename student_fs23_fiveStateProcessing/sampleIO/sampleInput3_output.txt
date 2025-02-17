@@ -1,0 +1,28 @@
+    1	[  admit]	r n n n n n n 
+    2	[  admit]	r r n n n n n 
+    3	[  admit]	r r r n n n n 
+    4	[  admit]	r r r r n n n 
+    5	[  admit]	r r r r r n n 
+    6	[  admit]	r r r r r r n 
+    7	[  admit]	r r r r r r r 
+    8	[  begin]	p r r r r r r 
+    9	[contRun]	p r r r r r r 
+   10	[ finish]	d r r r r r r 
+   11	[  begin]	d p r r r r r 
+   12	[contRun]	d p r r r r r 
+   13	[ finish]	d d r r r r r 
+   14	[  begin]	d d p r r r r 
+   15	[contRun]	d d p r r r r 
+   16	[ finish]	d d d r r r r 
+   17	[  begin]	d d d p r r r 
+   18	[contRun]	d d d p r r r 
+   19	[ finish]	d d d d r r r 
+   20	[  begin]	d d d d p r r 
+   21	[contRun]	d d d d p r r 
+   22	[ finish]	d d d d d r r 
+   23	[  begin]	d d d d d p r 
+   24	[contRun]	d d d d d p r 
+   25	[ finish]	d d d d d d r 
+   26	[  begin]	d d d d d d p 
+   27	[contRun]	d d d d d d p 
+   28	[ finish]	d d d d d d d 

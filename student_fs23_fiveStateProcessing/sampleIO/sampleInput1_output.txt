@@ -1,0 +1,54 @@
+    1	[*noAct*]	
+    2	[*noAct*]	
+    3	[*noAct*]	
+    4	[*noAct*]	
+    5	[  admit]	r 
+    6	[  begin]	p 
+    7	[contRun]	p n 
+    8	[contRun]	p n 
+    9	[contRun]	p n 
+   10	[contRun]	p n n 
+   11	[contRun]	p n n 
+   12	[contRun]	p n n 
+   13	[contRun]	p n n 
+   14	[contRun]	p n n 
+   15	[contRun]	p n n 
+   16	[ finish]	d n n 
+   17	[  admit]	d r n 
+   18	[  admit]	d r r 
+   19	[  begin]	d p r 
+   20	[contRun]	d p r 
+   21	[  ioReq]	d b r 
+   22	[  begin]	d b p 
+   23	[contRun]	d b p 
+   24	[contRun]	d b p 
+   25	[  ioReq]	d b b 
+   26	[ inrtpt]	d r b 
+   27	[ inrtpt]	d r r 
+   28	[  begin]	d p r 
+   29	[contRun]	d p r 
+   30	[contRun]	d p r 
+   31	[  ioReq]	d b r 
+   32	[  begin]	d b p 
+   33	[contRun]	d b p 
+   34	[ finish]	d b d 
+   35	[ inrtpt]	d r d 
+   36	[  begin]	d p d 
+   37	[contRun]	d p d 
+   38	[  ioReq]	d b d 
+   39	[*noAct*]	d b d 
+   40	[ inrtpt]	d r d 
+   41	[  begin]	d p d 
+   42	[contRun]	d p d 
+   43	[contRun]	d p d 
+   44	[contRun]	d p d 
+   45	[contRun]	d p d 
+   46	[contRun]	d p d 
+   47	[contRun]	d p d 
+   48	[contRun]	d p d 
+   49	[contRun]	d p d 
+   50	[contRun]	d p d 
+   51	[contRun]	d p d 
+   52	[contRun]	d p d 
+   53	[contRun]	d p d 
+   54	[ finish]	d d d 

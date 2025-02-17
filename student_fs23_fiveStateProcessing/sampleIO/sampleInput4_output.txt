@@ -1,0 +1,105 @@
+    1	[  admit]	r 
+    2	[  admit]	r r 
+    3	[  admit]	r r r n n n n 
+    4	[  admit]	r r r r n n n 
+    5	[  admit]	r r r r r n n 
+    6	[  admit]	r r r r r r n 
+    7	[  admit]	r r r r r r r 
+    8	[  begin]	p r r r r r r 
+    9	[contRun]	p r r r r r r 
+   10	[contRun]	p r r r r r r 
+   11	[contRun]	p r r r r r r 
+   12	[contRun]	p r r r r r r 
+   13	[  ioReq]	b r r r r r r 
+   14	[  begin]	b p r r r r r 
+   15	[contRun]	b p r r r r r 
+   16	[  ioReq]	b b r r r r r 
+   17	[  admit]	b b r r r r r r 
+   18	[ inrtpt]	b r r r r r r r 
+   19	[ inrtpt]	r r r r r r r r 
+   20	[  begin]	r r p r r r r r 
+   21	[contRun]	r r p r r r r r 
+   22	[contRun]	r r p r r r r r 
+   23	[ finish]	r r d r r r r r 
+   24	[  begin]	r r d p r r r r 
+   25	[contRun]	r r d p r r r r 
+   26	[contRun]	r r d p r r r r 
+   27	[contRun]	r r d p r r r r 
+   28	[contRun]	r r d p r r r r 
+   29	[contRun]	r r d p r r r r 
+   30	[contRun]	r r d p r r r r 
+   31	[contRun]	r r d p r r r r 
+   32	[  ioReq]	r r d b r r r r 
+   33	[  begin]	r r d b p r r r 
+   34	[contRun]	r r d b p r r r 
+   35	[ finish]	r r d b d r r r 
+   36	[  begin]	r r d b d p r r 
+   37	[contRun]	r r d b d p r r 
+   38	[ finish]	r r d b d d r r 
+   39	[  begin]	r r d b d d p r 
+   40	[contRun]	r r d b d d p r 
+   41	[contRun]	r r d b d d p r 
+   42	[contRun]	r r d b d d p r 
+   43	[  ioReq]	r r d b d d b r 
+   44	[ inrtpt]	r r d r d d b r 
+   45	[  begin]	r r d r d d b p 
+   46	[contRun]	r r d r d d b p 
+   47	[contRun]	r r d r d d b p 
+   48	[contRun]	r r d r d d b p 
+   49	[contRun]	r r d r d d b p 
+   50	[contRun]	r r d r d d b p 
+   51	[contRun]	r r d r d d b p 
+   52	[contRun]	r r d r d d b p 
+   53	[ finish]	r r d r d d b d 
+   54	[ inrtpt]	r r d r d d r d 
+   55	[  begin]	r p d r d d r d 
+   56	[contRun]	r p d r d d r d 
+   57	[contRun]	r p d r d d r d 
+   58	[  ioReq]	r b d r d d r d 
+   59	[ inrtpt]	r r d r d d r d 
+   60	[  begin]	p r d r d d r d 
+   61	[contRun]	p r d r d d r d 
+   62	[  ioReq]	b r d r d d r d 
+   63	[  begin]	b r d p d d r d 
+   64	[contRun]	b r d p d d r d 
+   65	[contRun]	b r d p d d r d 
+   66	[contRun]	b r d p d d r d 
+   67	[contRun]	b r d p d d r d 
+   68	[contRun]	b r d p d d r d 
+   69	[ finish]	b r d d d d r d 
+   70	[ inrtpt]	r r d d d d r d 
+   71	[  begin]	r r d d d d p d 
+   72	[  ioReq]	r r d d d d b d 
+   73	[  begin]	r p d d d d b d 
+   74	[contRun]	r p d d d d b d 
+   75	[  ioReq]	r b d d d d b d 
+   76	[  begin]	p b d d d d b d 
+   77	[contRun]	p b d d d d b d 
+   78	[contRun]	p b d d d d b d 
+   79	[contRun]	p b d d d d b d 
+   80	[contRun]	p b d d d d b d 
+   81	[contRun]	p b d d d d b d 
+   82	[contRun]	p b d d d d b d 
+   83	[contRun]	p b d d d d b d 
+   84	[contRun]	p b d d d d b d 
+   85	[contRun]	p b d d d d b d 
+   86	[contRun]	p b d d d d b d 
+   87	[contRun]	p b d d d d b d 
+   88	[contRun]	p b d d d d b d 
+   89	[ finish]	d b d d d d b d 
+   90	[ inrtpt]	d b d d d d r d 
+   91	[ inrtpt]	d r d d d d r d 
+   92	[  begin]	d r d d d d p d 
+   93	[contRun]	d r d d d d p d 
+   94	[contRun]	d r d d d d p d 
+   95	[contRun]	d r d d d d p d 
+   96	[contRun]	d r d d d d p d 
+   97	[contRun]	d r d d d d p d 
+   98	[contRun]	d r d d d d p d 
+   99	[contRun]	d r d d d d p d 
+  100	[contRun]	d r d d d d p d 
+  101	[ finish]	d r d d d d d d 
+  102	[  begin]	d p d d d d d d 
+  103	[contRun]	d p d d d d d d 
+  104	[contRun]	d p d d d d d d 
+  105	[ finish]	d d d d d d d d 
