@@ -9,16 +9,17 @@ int main(int argc, char* argv[])
 {
     // single thread processor
     // it's either processing something or it's not
-//    bool processorAvailable = true;
+    // bool processorAvailable = true;
 
     // vector of processes, processes will appear here when they are created by
     // the ProcessMgmt object (in other words, automatically at the appropriate time)
     list<Process> processList;
-    
+    Process* runningProcess = nullptr;
+
     // this will orchestrate process creation in our system, it will add processes to 
     // processList when they are created and ready to be run/managed
     ProcessManagement processMgmt(processList);
-
+    
     // this is where interrupts will appear when the ioModule detects that an IO operation is complete
     list<IOInterrupt> interrupts;   
 
@@ -57,14 +58,14 @@ int main(int argc, char* argv[])
 
 
     time = 0;
-//    processorAvailable = true;
+    //processorAvailable = true;
 
     //keep running the loop until all processes have been added and have run to completion
-    while(processMgmt.moreProcessesComing()  /* TODO add something to keep going as long as there are processes that arent done! */ )
+    bool allComplete = false;
+    while(processMgmt.moreProcessesComing() || !allComplete  /* TODO add something to keep going as long as there are processes that arent done! */ )
     {
         //Update our current time step
         ++time;
-
         //let new processes in if there are any
         processMgmt.activateProcesses(time);
 
@@ -77,7 +78,7 @@ int main(int argc, char* argv[])
         // - admit a new process if one is ready (i.e., take a 'newArrival' process and put them in the 'ready' state)
         // - address an interrupt if there are any pending (i.e., update the state of a blocked process whose IO operation is complete)
         // - start processing a ready process if there are any ready
-
+	
 
         //init the stepAction, update below
         stepAction = noAct;
@@ -95,7 +96,67 @@ int main(int argc, char* argv[])
         
 
         //   <your code here> 
+	if (runningProcess != nullptr){ //something is running and need to continue running
+		runningProcess -> processorTime++;
+		if (!runningProcess -> ioEvents.empty() && runningProcess -> processorTime == runningProcess -> ioEvents.front().time) { //IO REQUEST!!!
+			ioModule.submitIORequest(time, runningProcess -> ioEvents.front(), *runningProcess);
+			runningProcess -> ioEvents.pop_front();
+			runningProcess -> state = blocked;
+			runningProcess = nullptr;
+			stepAction = ioRequest;
+		}else if (runningProcess -> processorTime >= runningProcess -> reqProcessorTime){
+			runningProcess -> state = done;
+			runningProcess = nullptr;
+			stepAction = complete;
+		}else{
+			stepAction = continueRun;
+		}
 
+		
+	}else{ //nothing is running, check for in order: 1) admit new process 2) check for pending io request 3) run a ready process
+		for (auto it = processList.begin(); it != processList.end(); ++it){ //check for new processes
+			if (it -> state == newArrival){
+				it -> state = ready;
+				stepAction = admitNewProc;
+				break;
+			}
+
+		}
+		if (!interrupts.empty() && stepAction == noAct){ //check for interrupts for IO request completion
+			IOInterrupt inter = interrupts.front();
+			interrupts.pop_front();
+			for (auto it = processList.begin(); it != processList.end(); ++it){
+				if (it -> id == inter.procID){
+					it -> state = ready;
+					stepAction = handleInterrupt; 
+					break;
+				}
+			}
+		}else if (stepAction == noAct){//Check for a ready process
+			for (auto it = processList.begin(); it != processList.end(); ++it){
+				if (it -> state == ready){
+					runningProcess = &(*it);
+					runningProcess -> state = processing;
+					stepAction = beginRun;
+					break;
+				}
+			}
+		}
+
+		if (stepAction == noAct){ //check if everything is done??
+			for (auto it = processList.begin(); it != processList.end(); ++it){
+				if (it -> state != done){
+					allComplete = false;
+					break;
+				}else{
+					allComplete = true;
+				}
+			}
+		}
+
+		if (allComplete){break;}
+	}
+	
 
 
 
