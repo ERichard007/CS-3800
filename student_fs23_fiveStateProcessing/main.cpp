@@ -4,6 +4,7 @@
 
 #include <chrono> // for sleep
 #include <thread> // for sleep
+#include <queue> // for ready list
 
 int main(int argc, char* argv[])
 {
@@ -15,7 +16,7 @@ int main(int argc, char* argv[])
     // the ProcessMgmt object (in other words, automatically at the appropriate time)
     list<Process> processList;
     Process* runningProcess = nullptr;
-
+    std::queue<Process*> readyList;
     // this will orchestrate process creation in our system, it will add processes to 
     // processList when they are created and ready to be run/managed
     ProcessManagement processMgmt(processList);
@@ -117,6 +118,7 @@ int main(int argc, char* argv[])
 		for (auto it = processList.begin(); it != processList.end(); ++it){ //check for new processes
 			if (it -> state == newArrival){
 				it -> state = ready;
+				readyList.push(&(*it));
 				stepAction = admitNewProc;
 				break;
 			}
@@ -128,18 +130,17 @@ int main(int argc, char* argv[])
 			for (auto it = processList.begin(); it != processList.end(); ++it){
 				if (it -> id == inter.procID){
 					it -> state = ready;
+					readyList.push(&(*it));
 					stepAction = handleInterrupt; 
 					break;
 				}
 			}
 		}else if (stepAction == noAct){//Check for a ready process
-			for (auto it = processList.begin(); it != processList.end(); ++it){
-				if (it -> state == ready){
-					runningProcess = &(*it);
-					runningProcess -> state = processing;
-					stepAction = beginRun;
-					break;
-				}
+			if (!readyList.empty()){
+				runningProcess = readyList.front();
+				readyList.pop();
+				runningProcess -> state = processing;
+				stepAction = beginRun;
 			}
 		}
 
