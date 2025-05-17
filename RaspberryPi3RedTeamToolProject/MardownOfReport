@@ -27,8 +27,9 @@ In this project we aimed to simulate this exact scenario with a basic setup whic
 
 The goal of this entire process was to learn more about network security, how to take advantage of unsecured networks, and what preventative measures exist for these kinds of attacks, if any.
 
-<img src="/RaspberryPi3RedTeamToolProject/Images/1.jpg" alt='Fig 1' width='200'/>
-Fig. 1. Raspberry Pi 3 Model B+ with HDMI connection to monitor, ethernet cable, keyboard/mouse cable, and power supply.
+<img src="../RaspberryPi3RedTeamToolProject/Images/1.jpg" alt='Fig1' width='200'/>
+
+*Fig. 1. Raspberry Pi 3 Model B+ with HDMI connection to monitor, ethernet cable, keyboard/mouse cable, and power supply.*
 
 ## II. SETTING UP ROGUE AP
 
@@ -47,50 +48,57 @@ domain names on the rogue network. Hostapd turns the wireless interface into an 
 We then need to fix the config file of hostapd using “sudo nano /etc/hostapd/hostapd.conf” for permissions (making sure we are at the root when doing this, as the files we installed will be under the etc directory). This is necessary to define how our rogue access point should behave—this includes setting parameters like the SSID name, wireless interface, channel, and security settings. (See Fig. 2)
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/2.png" alt='Fig1' width='200'/>
 
-Fig. 2. Shows hostapd.conf code.
+*Fig. 2. Shows hostapd.conf code.*
 
 
 Next, direct the system to the location of our configuration file by executing “sudo nano /etc/default/hostapd” and add the line “DAEMON_CONF=/etc/hostapd/hostapd.conf”. This step ensures that hostapd is aware of the location of its configuration file as specified in the code. (See Fig. 3)
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/3.png" alt='Fig1' width='200'/>
 
-Fig. 3. Shows hostapd code.
+*Fig. 3. Shows hostapd code.*
 
 
 Now we do the same thing except with dnsmasq. We do “sudo nano /etc/dnsmasq.conf” to open and get permissions to edit the file. This step is essential because dnsmasq is responsible for assigning IP addresses to clients that connect to our fake access point. The interface line specifies which wireless interface dnsmasq should listen on. The dhcp-range sets the pool of IP addresses that can be handed out to connected devices. Insert the following: (See Fig. 4)
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/4.png" alt='Fig1' width='200'/>
 
-Fig. 4. Shows dnsmasq.conf.
+*Fig. 4. Shows dnsmasq.conf.*
 
 
 Now that we have set the interface to wlan0, we need to give wlan0 a static IP. Wlan0 must have a fixed and predictable IP address so that dnsmasq can correctly hand out IPs. We open the dhcpcd’s config file with “sudo nano /etc/dhcpcd.conf”. Dhcpcd is a lightweight DHCP client used on Linux systems to automatically configure network interfaces. We add the following to the config file: (See Fig. 5)
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/5.png" alt='Fig1' width='200'/>
 
-Fig. 5. Shows dhcpd.conf code.
+*Fig. 5. Shows dhcpd.conf code.*
 
 
 Next, we enabled IP forwarding by running “sudo nano /etc/sysctl.conf”. We then uncomment the line “net.ipv4.ip_forward=1”. IP forwarding is a network setting that will allow our device to pass network traffic from one interface to another, acting like a router. (See Fig. 6)
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/6.png" alt='Fig1' width='200'/>
 
-Fig. 6. Shows sysctl.conf code.
+*Fig. 6. Shows sysctl.conf code.*
 
 
 Lastly before starting we need to configure our iptables rules for NAT and redirection. This will allow client devices connected to the AP to share the internet with the Pi and intercept HTTP traffic. (See Fig 7)
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/7.png" alt='Fig1' width='200'/>
 
-Fig. 7. Shows iptables NAT and redirection terminal commands
+*Fig. 7. Shows iptables NAT and redirection terminal commands*
 
 
 Last but not least, we start everything. (See Fig 8)
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/8.png" alt='Fig1' width='200'/>
 
-Fig. 8. Shows terminal commands to start dnsmasq and hostapd.
+*Fig. 8. Shows terminal commands to start dnsmasq and hostapd.*
 
 
 Common issues we ran into when setting up were “hostapd.service is masked”. This happens because when installing hostapd from a repo, it automatically starts as masked. To fix this, just unmask it “sudo systemctl unmask hostapd” and start again with “sudo systemctl status hostapd”. It is also important to note that to check the status of both hostapd and dnsmask, you can simply run the command “sudo systemctl status [insert name]” where insert name is either hostapd or dnsmasq. Another important command to know is
@@ -107,12 +115,14 @@ Firstly, we will need to preinstall some tools that Wi-Fi pumpkin needs to opera
 We can then setup a virtual environment with “python3 -m venv venv” and activate it with “source venv/bin/activate”. Finally, we will install some python requirements with “pip install –upgrade pip” and “pip install –break-system-packages -r requirements.txt”. You should now be in a virtual environment seeing (venv) at the beginning and all you need to do is return to the root where you cloned the repository and run “wifipumpkin3”. A message will appear to confirm a user configuration has been successfully made and then you can run the command “wifipumpkin3” one more time to launch (see Fig. 8).
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/8(2).png" alt='Fig1' width='200'/>
 
-Fig. 8. Wifi-Pumpkin3 Mascot that shows after running banner command.
+*Fig. 8. Wifi-Pumpkin3 Mascot that shows after running banner command.*
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/9.png" alt='Fig1' width='200'/>
 
-Fig. 9. Shows DontConnectPls as an available Wi-Fi hotspot to connect to. This is the ssid of our rogue AP setup using free software.
+*Fig. 9. Shows DontConnectPls as an available Wi-Fi hotspot to connect to. This is the ssid of our rogue AP setup using free software.*
 
 
 ## III. RESULTS AND ANALYSIS
@@ -127,20 +137,24 @@ Where things get more interesting is when we setup Wifi-Pumpkin3 and started a r
 Upon starting our rogue AP we immediately tried connecting the “victim’s” laptop (See Fig. 12). Upon opening a browser the victim was brought to a login page and prompted to login. This works on both laptops and phones (See Fig. 10 and Fig. 11).
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/10.jpg" alt='Fig1' width='200'/>
 
-Fig. 10. Shows a victim on a laptop brought onto a fake captive portal login page asking for login credentials.
-
-
-
-Fig. 11. Shows a fake captive portal login page on iOS.
+*Fig. 10. Shows a victim on a laptop brought onto a fake captive portal login page asking for login credentials.*
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/11.png" alt='Fig1' width='200'/>
 
-Fig. 12. Shows notified of client joining AP along with some credentials.
+*Fig. 11. Shows a fake captive portal login page on iOS.*
 
 
+<img src="../RaspberryPi3RedTeamToolProject/Images/12.png" alt='Fig1' width='200'/>
 
-Fig. 13. Shows captured login credentials from a login attempt.
+*Fig. 12. Shows notified of client joining AP along with some credentials.*
+
+
+<img src="../RaspberryPi3RedTeamToolProject/Images/13.png" alt='Fig1' width='200'/>
+
+*Fig. 13. Shows captured login credentials from a login attempt.*
 
 
 As seen above in Fig. 13, when the victim enters their login credentials or submits anything into the captive portal, we are sent back their information, and they are free to roam the internet. However, since they are connected to our AP, we can perform some MITM exploration as any sites they visit are recorded and sent to us on our open terminal.
