@@ -27,6 +27,7 @@ In this project we aimed to simulate this exact scenario with a basic setup whic
 
 The goal of this entire process was to learn more about network security, how to take advantage of unsecured networks, and what preventative measures exist for these kinds of attacks, if any.
 
+
 <img src="../RaspberryPi3RedTeamToolProject/Images/1.jpg" alt='Fig1' width='200'/>
 
 *Fig. 1. Raspberry Pi 3 Model B+ with HDMI connection to monitor, ethernet cable, keyboard/mouse cable, and power supply.*
